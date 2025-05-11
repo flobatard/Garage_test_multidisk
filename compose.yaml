@@ -1,0 +1,36 @@
+services:  
+  garage-test-multidisk-node:
+      build:
+        context: .
+        args:
+          - NODE_ENV=development
+      # you can use legacy debug config or new inspect
+      # NOTE: if nodemon isn't restarting on changes, you might be on Windows
+      # which has trouble seeing file changes, so add -L to use legacy polling
+      # https://github.com/remy/nodemon#application-isnt-restarting
+      #command: ../node_modules/.bin/nodemon --debug=0.0.0.0:5858
+      ports:
+        - "3000:3000"
+      volumes:
+        - .:/opt/node_app/app
+        # bind-mounting these two files in will let you add packages during development without rebuilding
+        # for example, to add bower to your app while developing, just install it inside the container
+        # and then nodemon will restart. Your changes will last until you "docker compose down" and will
+        # be saved on host for next build.
+        # remember to isntall from the parent directory to the code bind-mount:
+        # docker compose exec -w /opt/node_app node npm install --save bower
+        - ./package.json:/opt/node_app/package.json
+        - ./package-lock.json:/opt/node_app/package-lock.json
+  garage-1:
+    image: dxflrs/garage:v1.1.0
+    restart: always
+    volumes:
+      - ./garage_data/disk_data:/var/lib/garage/data
+      - ./garage_data/external_disk_data:/var/lib/garage/external_disk_data_1
+      - ./garage_data/metadata:/var/lib/garage/metadata
+      - ./garage_data/snapshots:/var/lib/garage/snapshots 
+      - ./garage/node-a/garage.toml:/etc/garage.toml
+    network_mode: "host"
+volumes:
+  garage_data_a:
+  garage_metadata_a:

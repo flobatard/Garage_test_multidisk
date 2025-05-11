@@ -1,0 +1,45 @@
+replication_factor = 1
+consistency_mode = "consistent"
+
+metadata_dir = "/var/lib/garage/metadata"
+data_dir = [
+    { path = "/var/lib/garage/data", capacity = "2G" },
+    { path = "/var/lib/garage/external_data_1", capacity = "500G" },
+]
+db_engine = "lmdb"
+
+metadata_snapshots_dir = "/var/lib/garage/snapshots"
+metadata_fsync = true
+data_fsync = false
+disable_scrub = false
+use_local_tz = false
+metadata_auto_snapshot_interval = "6h"
+
+block_size = "1M"
+block_ram_buffer_max = "256MiB"
+
+lmdb_map_size = "64G"
+
+compression_level = 1
+
+rpc_bind_addr = "[::]:3901"
+rpc_public_addr = "127.0.0.1:3901"
+rpc_secret = "de3f7fab5dbf9bc22ce606c02e10da1143b212dd03ab19b702ef4c6f604506ca"
+
+[s3_api]
+s3_region = "gtm_test_garage"
+api_bind_addr = "[::]:3900"
+root_domain = "localhost"
+
+[s3_web]
+bind_addr = "[::]:3902"
+root_domain = "localhost"
+index = "index.html"
+
+[k2v_api]
+api_bind_addr = "[::]:3904"
+
+[admin]
+api_bind_addr = "[::]:3903"
+admin_token = "U/7Jdm7CfGceNShHTsxKbP9v8WGcRIXNGfpB5Ps2Whg="
+metrics_token = "KotwngWXSVuor/HtDLPUvAaGiElNCjDICUY0LUlegxY="

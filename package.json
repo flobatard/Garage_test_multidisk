@@ -1,0 +1,20 @@
+{
+  "name": "garage_test",
+  "version": "1.0.0",
+  "description": "Testing garage deployement capability with minimalist node.js code",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "nodemon ./index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "minio": "^8.0.5",
+    "multer": "^1.4.5-lts.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
