@@ -22,7 +22,7 @@ services:
         - ./package.json:/opt/node_app/package.json
         - ./package-lock.json:/opt/node_app/package-lock.json
   garage-1:
-    image: dxflrs/garage:v1.1.0
+    image: dxflrs/garage:v2.0.0-beta1
     restart: always
     volumes:
       - ./garage_data/disk_data:/var/lib/garage/data
